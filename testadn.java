@@ -6,8 +6,9 @@ import java.util.List;
 
 public class testadn {
 
-	public boolean match(List<String> chaine1, List<String> chaine2) {
-
+	public boolean match(List<String> brinGauche, List<String> brinDroite) {
+		String chaine1 = brinGauche.Stream().collect(Collections.joining());
+		String chaine2 = brinDroite.Stream().collect(Collections.joining());
 		return false;
 	}
 
