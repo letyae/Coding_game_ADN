@@ -76,11 +76,12 @@ public class testadn {
 		Source.add("TAG");
 		// System.out.println("Source=" + Source.size());
 
-		for (int j = 1; j < combinaisonList.size(); j++) {
+		for (int j = 0; j < combinaisonList.size(); j++) {
 
 			combinaison = combinaisonList.get(j);
 
 			for (int i = 1; i < Source.size() - 1; i++) {
+
 				List<String> brinGauche = new ArrayList<>();
 				List<String> brinDroite = new ArrayList<>();
 
@@ -101,13 +102,17 @@ public class testadn {
 					 * System.out.println("Source: " + Source); System.out.println("brinGauche=" +
 					 * brinGauche); System.out.println("brinDroite=" + brinDroite);
 					 */
-					System.out.println("combinaison:" + combinaison);
+					// System.out.println("combinaison:" + combinaison);
 
 					String res1 = String.join(" ", brinGauche);
 					String res2 = String.join(" ", brinDroite);
+
 					res1 = res1.concat("#").concat(res2);
-					System.out.println("resultat=" + res1);
-					System.out.println();
+					System.out.println(res1);
+					// System.out.println("");
+
+					j = combinaisonList.size();
+
 					break;
 				}
 
