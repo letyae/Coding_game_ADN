@@ -64,8 +64,8 @@ public class testadn {
 		List<Integer> passed = new ArrayList<>();
 		testadn adn = new testadn();
 		List<List<Integer>> combinaisonList = adn.allCombinaisons(4, passed, 4);
-		System.out.println(combinaisonList);
-		System.out.println("1st:" + combinaisonList.get(0));
+		// System.out.println(combinaisonList);
+		// System.out.println("1st:" + combinaisonList.get(0));
 
 		List<Integer> combinaison = new ArrayList<>();
 
@@ -74,7 +74,7 @@ public class testadn {
 		Source.add("G");
 		Source.add("CC");
 		Source.add("TAG");
-		System.out.println("Source=" + Source.size());
+		// System.out.println("Source=" + Source.size());
 
 		for (int j = 1; j < combinaisonList.size(); j++) {
 
@@ -91,12 +91,25 @@ public class testadn {
 				for (int i1 = i; i1 < Source.size(); i1++) {
 					brinDroite.add(Source.get(combinaison.get(i1)));
 				}
-				System.out.println("brinGauche=" + brinGauche);
-				System.out.println("brinDroite=" + brinDroite);
+				// System.out.println("brinGauche=" + brinGauche);
+				// System.out.println("brinDroite=" + brinDroite);
 
 				boolean resultat = adn.match(brinGauche, brinDroite);
-				System.out.println("resultat=" + resultat);
-				System.out.println();
+
+				if (resultat) {
+					/*
+					 * System.out.println("Source: " + Source); System.out.println("brinGauche=" +
+					 * brinGauche); System.out.println("brinDroite=" + brinDroite);
+					 */
+					System.out.println("combinaison:" + combinaison);
+
+					String res1 = String.join(" ", brinGauche);
+					String res2 = String.join(" ", brinDroite);
+					res1 = res1.concat("#").concat(res2);
+					System.out.println("resultat=" + res1);
+					System.out.println();
+					break;
+				}
 
 			}
 
