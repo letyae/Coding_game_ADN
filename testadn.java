@@ -40,36 +40,66 @@ public class testadn {
 		return true;
 	}
 
-	public List<List<Integer>> allCombinaisons(int nb, List<Integer> passed, int n) {
+	public List<List<Integer>> allCombinaisons(int nbFragment, List<Integer> passed, int nRestant) {
+
+		List<List<Integer>> combinaison = new ArrayList<>();
+		if (nRestant == 0)
+			return Collections.singletonList(passed);
 
 		// System.out.println("**********************_Iteration_*****************************");
-
-		List<List<Integer>> res = new ArrayList<>();
-
-		if (n == 0) {
-			// System.out.println("singleton" + Collections.singletonList(passed));
-			return Collections.singletonList(passed);
-		}
-		for (int i = 0; i < nb; i++) {
+		for (int i = 0; i < nbFragment; i++) {
 			if (passed.contains(i)) {
 				continue;
 			}
-			List<Integer> passedNext = new ArrayList<>(passed);
-			// System.out.println("passedNext init:" + passedNext);
-			passedNext.add(i);
-			// System.out.println("passedNext init add i:" + passedNext);
-			res.addAll(allCombinaisons(nb, passedNext, n - 1));
-			// System.out.println("res = " + res);
+
+			List<Integer> nextPassed = new ArrayList<>(passed);
+			nextPassed.add(i);
+			combinaison.addAll(allCombinaisons(nbFragment, nextPassed, nRestant - 1));
 		}
-		return res;
+		return combinaison;
 	}
 
 	public static void main(String[] args) {
+
 		List<Integer> passed = new ArrayList<>();
 		testadn adn = new testadn();
-		List<List<Integer>> combinaison = adn.allCombinaisons(2, passed, 2);
-		System.out.println(combinaison);
+		List<List<Integer>> combinaisonList = adn.allCombinaisons(4, passed, 4);
+		System.out.println(combinaisonList);
+		System.out.println("1st:" + combinaisonList.get(0));
 
-		List<String> combinaisList = new ArrayList<>();
+		List<Integer> combinaison = new ArrayList<>();
+
+		List<String> Source = new ArrayList<>();
+		Source.add("AT");
+		Source.add("G");
+		Source.add("CC");
+		Source.add("TAG");
+		System.out.println("Source=" + Source.size());
+
+		for (int j = 1; j < combinaisonList.size(); j++) {
+
+			combinaison = combinaisonList.get(j);
+
+			for (int i = 1; i < Source.size() - 1; i++) {
+				List<String> brinGauche = new ArrayList<>();
+				List<String> brinDroite = new ArrayList<>();
+
+				for (int i0 = 0; i0 < i; i0++) {
+					brinGauche.add(Source.get(combinaison.get(i0)));
+				}
+
+				for (int i1 = i; i1 < Source.size(); i1++) {
+					brinDroite.add(Source.get(combinaison.get(i1)));
+				}
+				System.out.println("brinGauche=" + brinGauche);
+				System.out.println("brinDroite=" + brinDroite);
+
+				boolean resultat = adn.match(brinGauche, brinDroite);
+				System.out.println("resultat=" + resultat);
+				System.out.println();
+
+			}
+
+		}
 	}
 }
