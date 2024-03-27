@@ -3,9 +3,18 @@ package coding_game_ADN;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class testadn {
+public class ADN {
+
+	/**
+	 * match - comparer 2 chaines de caractere
+	 * 
+	 * @param brinGauche -une liste de chaine de caractere
+	 * @param brinDroite -une liste de chaine de caractere
+	 * @return boolean
+	 */
 
 	public boolean match(List<String> brinGauche, List<String> brinDroite) {
 		String chaine1 = brinGauche.stream().collect(Collectors.joining());
@@ -40,13 +49,22 @@ public class testadn {
 		return true;
 	}
 
+	/**
+	 * allCombinaisons - combinaison possible des indices de fragment d'ADN
+	 * represente par un liste de String
+	 * 
+	 * @param nbFragment -nombre de fragment d'ADN
+	 * @param passed     -liste d'indice traite
+	 * @param nRestant   -nombre d'indice non traite
+	 * @return combinaison- liste de liste d'indice entier
+	 */
+
 	public List<List<Integer>> allCombinaisons(int nbFragment, List<Integer> passed, int nRestant) {
 
 		List<List<Integer>> combinaison = new ArrayList<>();
 		if (nRestant == 0)
 			return Collections.singletonList(passed);
 
-		// System.out.println("**********************_Iteration_*****************************");
 		for (int i = 0; i < nbFragment; i++) {
 			if (passed.contains(i)) {
 				continue;
@@ -59,22 +77,25 @@ public class testadn {
 		return combinaison;
 	}
 
-	public static void main(String[] args) {
+	public void main() {
+
+		String line;
+		Scanner sc = new Scanner(System.in);
+		int nbFragment = sc.nextInt();
+		sc.nextLine();
+		List<String> source = new ArrayList<>();
+
+		while (sc.hasNextLine()) {
+			line = sc.nextLine();
+			source.add(line);
+		}
+		sc.close();
 
 		List<Integer> passed = new ArrayList<>();
-		testadn adn = new testadn();
-		List<List<Integer>> combinaisonList = adn.allCombinaisons(4, passed, 4);
-		// System.out.println(combinaisonList);
-		// System.out.println("1st:" + combinaisonList.get(0));
+		ADN adn = new ADN();
+		List<List<Integer>> combinaisonList = adn.allCombinaisons(nbFragment, passed, nbFragment);
 
 		List<Integer> combinaison = new ArrayList<>();
-
-		List<String> source = new ArrayList<>();
-		source.add("AT");
-		source.add("G");
-		source.add("CC");
-		source.add("TAG");
-		// System.out.println("Source=" + Source.size());
 
 		for (int j = 0; j < combinaisonList.size(); j++) {
 
@@ -119,5 +140,6 @@ public class testadn {
 			}
 
 		}
+
 	}
 }
